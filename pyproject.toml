@@ -1,0 +1,4 @@
+[tool.taskify.tasks]
+server = "flask run --debug"
+proxy = "flask run -h localhost -p 4000 --debug"
+teste = "flask --app teste --debug run"
