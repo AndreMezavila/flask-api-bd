@@ -46,11 +46,13 @@ def create_student():
 
 @app.route('/students/<int:student_id>', methods=['DELETE'])
 def delete_student(student_id):
-    if student_id not in students:
-        return {'error': 'Student not found'}, 404
-
-    del students[student_id]
-    return {'message': 'Student deleted successfully'}
+    student = Student.query.get(student_id)
+    if student:
+        db.session.delete(student)
+        db.session.commit()
+        return {'message': 'Student deleted successfully'}
+    else:
+        return {'error': 'Student not found'}
 
 @app.route('/students/<int:student_id>', methods=['PUT'])
 def update_student(student_id):
