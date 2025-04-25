@@ -1,10 +1,10 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, json
 from flask_sqlalchemy import SQLAlchemy
-
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+json.provider.DefaultJSONProvider.ensure_ascii= False
 
 db = SQLAlchemy(app)
 
@@ -27,10 +27,11 @@ def list_students_all():
 
 @app.route('/students/<int:student_id>', methods=['GET'])
 def list_student_id(student_id):
-  return students.get(
-      student_id,
-      {'error': 'Student not found'}
-  )
+  student = Student.query.get(student_id)
+  if student:
+    return student.as_dict()
+  else:
+    return {"error": "student not found!"} 
 
 @app.route('/students', methods=['POST'])
 def create_student():
