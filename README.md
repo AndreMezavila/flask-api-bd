@@ -18,6 +18,8 @@
 	<p><strong>source venv/bin/activate (activate) </strong></p>
 <p>4 install the requirements from the requirements.txt file </p>
 	<p><strong>pip install -i requirements.txt </strong></p>
+<p>4 installing the local database </p>
+	<p><strong>python setup.py </strong></p>
 
 
 <h3>🖥️ how to test: 🖥️ </h3>
